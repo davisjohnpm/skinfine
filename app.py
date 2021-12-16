@@ -22,7 +22,8 @@ ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'JPG', 'JPEG', 'png'])
 app = Flask(__name__)
 
 def get_as_base64(url):
-    return base64.b64encode(requests.get(url).content)
+    return base64.b64encode(requests.get(url, timeout=60).content)
+##### above used to be just url, no timeout
 
 def ensemble_predict(test_data):
     test_data = load_img(test_data, target_size=(IMG_WIDTH, IMG_HEIGHT))
